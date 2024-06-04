@@ -84,7 +84,7 @@ class SmsReceiverPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
         }
       }
       smsBroadcastReceiver.injectListener(listener)
-      if (Build.VERSION.SDK_INT >= 33) {
+      if (Build.VERSION.SDK_INT >= 34) {
         activity.registerReceiver(smsBroadcastReceiver,
           IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION),
           Context.RECEIVER_EXPORTED)
