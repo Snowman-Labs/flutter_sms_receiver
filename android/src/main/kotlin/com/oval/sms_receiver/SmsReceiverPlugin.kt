@@ -82,8 +82,14 @@ class SmsReceiverPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
         }
       }
       smsBroadcastReceiver.injectListener(listener)
-      activity.registerReceiver(smsBroadcastReceiver,
-              IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION))
+      if (Build.VERSION.SDK_INT >= 33) {
+        activity.registerReceiver(smsBroadcastReceiver,
+          IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION),
+          Context.RECEIVER_EXPORTED)
+      } else {
+        activity.registerReceiver(smsBroadcastReceiver,
+          IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION))
+      }
     }
     retriever.addOnFailureListener {
       channel.invokeMethod("onFailureListener", null)
