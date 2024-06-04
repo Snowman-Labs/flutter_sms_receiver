@@ -1,11 +1,11 @@
 package com.oval.sms_receiver
 
 import android.app.Activity
+import android.content.Context
 import android.content.IntentFilter
 import android.os.Build
 import android.util.Log
 import androidx.annotation.NonNull
-import androidx.core.content.ContextCompat
 import com.google.android.gms.auth.api.phone.SmsRetriever
 import io.flutter.embedding.engine.plugins.FlutterPlugin
 import io.flutter.embedding.engine.plugins.activity.ActivityAware
@@ -87,7 +87,7 @@ class SmsReceiverPlugin: FlutterPlugin, MethodCallHandler, ActivityAware {
       if (Build.VERSION.SDK_INT >= 34) {
         activity.registerReceiver(smsBroadcastReceiver,
           IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION),
-          ContextCompat.RECEIVER_EXPORTED)
+          Context.RECEIVER_EXPORTED)
       } else {
         activity.registerReceiver(smsBroadcastReceiver,
           IntentFilter(SmsRetriever.SMS_RETRIEVED_ACTION))
